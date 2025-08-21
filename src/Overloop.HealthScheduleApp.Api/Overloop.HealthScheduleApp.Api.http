@@ -1,0 +1,6 @@
+@Overloop.HealthScheduleApp.Api_HostAddress = http://localhost:5025
+
+GET {{Overloop.HealthScheduleApp.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

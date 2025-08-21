@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{107F6D71-E8BE-4A00-9FAD-E6A791404EF8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Overloop.HealthScheduleApp.Api", "src\Overloop.HealthScheduleApp.Api\Overloop.HealthScheduleApp.Api.csproj", "{EE0D729F-A79F-46D6-9CD1-FD24BCE38075}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{B03C4F60-FB49-4FDA-B403-14653EC76E47}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Overloop.HealthScheduleApp.Api.Tests", "tests\Overloop.HealthScheduleApp.Api.Tests\Overloop.HealthScheduleApp.Api.Tests.csproj", "{FCB3FEAE-4879-42F0-9365-D63E3DD0A049}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Overloop.HealthScheduleApp.Domain", "src\Overloop.HealthScheduleApp.Domain\Overloop.HealthScheduleApp.Domain.csproj", "{DA1720F9-DA7D-4E94-934B-164269DEA364}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Overloop.HealthScheduleApp.Application", "src\Overloop.HealthScheduleApp.Application\Overloop.HealthScheduleApp.Application.csproj", "{A064E9B2-4C80-4777-BFC3-4C7316416C6C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Overloop.HealthScheduleApp.Infrastructure", "src\Overloop.HealthScheduleApp.Infrastructure\Overloop.HealthScheduleApp.Infrastructure.csproj", "{FF7CFA68-E482-4C54-93ED-79998DB8B8A0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EE0D729F-A79F-46D6-9CD1-FD24BCE38075}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE0D729F-A79F-46D6-9CD1-FD24BCE38075}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE0D729F-A79F-46D6-9CD1-FD24BCE38075}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE0D729F-A79F-46D6-9CD1-FD24BCE38075}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCB3FEAE-4879-42F0-9365-D63E3DD0A049}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCB3FEAE-4879-42F0-9365-D63E3DD0A049}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCB3FEAE-4879-42F0-9365-D63E3DD0A049}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCB3FEAE-4879-42F0-9365-D63E3DD0A049}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA1720F9-DA7D-4E94-934B-164269DEA364}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA1720F9-DA7D-4E94-934B-164269DEA364}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA1720F9-DA7D-4E94-934B-164269DEA364}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA1720F9-DA7D-4E94-934B-164269DEA364}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A064E9B2-4C80-4777-BFC3-4C7316416C6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A064E9B2-4C80-4777-BFC3-4C7316416C6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A064E9B2-4C80-4777-BFC3-4C7316416C6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A064E9B2-4C80-4777-BFC3-4C7316416C6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF7CFA68-E482-4C54-93ED-79998DB8B8A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF7CFA68-E482-4C54-93ED-79998DB8B8A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF7CFA68-E482-4C54-93ED-79998DB8B8A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF7CFA68-E482-4C54-93ED-79998DB8B8A0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EE0D729F-A79F-46D6-9CD1-FD24BCE38075} = {107F6D71-E8BE-4A00-9FAD-E6A791404EF8}
+		{FCB3FEAE-4879-42F0-9365-D63E3DD0A049} = {B03C4F60-FB49-4FDA-B403-14653EC76E47}
+		{DA1720F9-DA7D-4E94-934B-164269DEA364} = {107F6D71-E8BE-4A00-9FAD-E6A791404EF8}
+		{A064E9B2-4C80-4777-BFC3-4C7316416C6C} = {107F6D71-E8BE-4A00-9FAD-E6A791404EF8}
+		{FF7CFA68-E482-4C54-93ED-79998DB8B8A0} = {107F6D71-E8BE-4A00-9FAD-E6A791404EF8}
+	EndGlobalSection
+EndGlobal

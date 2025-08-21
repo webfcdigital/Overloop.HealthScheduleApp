@@ -1,0 +1,32 @@
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.builds
+*.pidb
+*.log
+*.scc
+
+# Build results
+[Bb]in/
+[Oo]bj/
+
+# Packages
+*.nupkg
+*.snupkg
+
+# Rider
+.idea/
+*.iml
+
+# macOS
+.DS_Store
+
+# Linux
+*.swp
+
+# Misc
+*.bak
+*.tmp
