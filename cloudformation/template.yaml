@@ -77,7 +77,7 @@ Resources:
       FunctionName: HealthScheduleAppApi
       Handler: Overloop.HealthScheduleApp.Api::Overloop.HealthScheduleApp.Api.LambdaEntryPoint::FunctionHandlerAsync
       Runtime: dotnet8
-      CodeUri: ../src/Overloop.HealthScheduleApp.Api/bin/Release/net8.0/publish
+      CodeUri: ../src/Overloop.HealthScheduleApp.Api
       MemorySize: 256
       Timeout: 30
       Role: !GetAtt ApiLambdaRole.Arn
