@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Overloop.HealthScheduleApp.Api</name>
+    </assembly>
+    <members>
+        <member name="M:Overloop.HealthScheduleApp.Api.Controllers.ConsultasController.Create(Overloop.HealthScheduleApp.Application.DTOs.CreateConsultaDto)">
+            <summary>
+            Creates a new consultation.
+            </summary>
+            <param name="createConsultaDto">The consultation data.</param>
+            <returns>A newly created consultation.</returns>
+            <response code="201">Returns the newly created consultation.</response>
+            <response code="400">If the consultation data is invalid.</response>
+        </member>
+        <member name="M:Overloop.HealthScheduleApp.Api.Controllers.ConsultasController.GetById(System.Guid)">
+            <summary>
+            Gets a consultation by its ID.
+            </summary>
+            <param name="id">The ID of the consultation.</param>
+            <returns>The consultation with the specified ID.</returns>
+            <response code="200">Returns the consultation.</response>
+            <response code="404">If the consultation is not found.</response>
+        </member>
+        <member name="T:Overloop.HealthScheduleApp.Api.LambdaEntryPoint">
+            <summary>
+            This class extends from APIGatewayHttpApiV2ProxyFunction which contains the method FunctionHandlerAsync
+            which is the actual Lambda function entry point. The Lambda handler field should be set to
+            Overloop.HealthScheduleApp.Api::Overloop.HealthScheduleApp.Api.LambdaEntryPoint::FunctionHandlerAsync
+            </summary>
+        </member>
+    </members>
+</doc>

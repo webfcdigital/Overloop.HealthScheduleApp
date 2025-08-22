@@ -1,54 +1,52 @@
-# Sistema de Agendamento Médico Serverless
+# Serverless Medical Scheduling System
 
-Este projeto é uma implementação de um sistema de agendamento médico, construído com uma arquitetura serverless na AWS, utilizando C# e .NET 8.
+This project is an implementation of a medical scheduling system, built with a serverless architecture on AWS, using C# and .NET 8.
 
-## 1. Contexto de Negócio
+## 1. Business Context
 
-O sistema é uma plataforma para conectar pacientes e médicos. Ele permite que pacientes busquem médicos por especialidade e agendem consultas. Médicos, por sua vez, podem gerenciar sua agenda e receber notificações de novos agendamentos.
+The system is a platform for connecting patients and doctors. It allows patients to search for doctors by specialty and schedule appointments. Doctors, in turn, can manage their schedules and receive notifications of new appointments.
 
-### Entidades do Domínio (DDD)
+### Domain Entities (DDD)
 
-*   **Paciente**: Um usuário que busca e agenda consultas.
-*   **Medico**: Um profissional de saúde com uma especialidade, que disponibiliza horários para consultas.
-*   **Consulta**: O principal agregado do sistema. Representa o agendamento de um encontro entre um Paciente e um Medico. Possui um status (agendada, cancelada, concluída) e uma data/hora.
-*   **Agenda**: Representa os horários disponíveis de um Medico.
+* **Patient**: A user who searches for and schedules appointments.
+* **Doctor**: A healthcare professional with a specialty who makes appointments available.
+* **Appointment**: The main aggregate of the system. It represents the scheduling of an appointment between a patient and a doctor. It has a status (scheduled, canceled, completed) and a date/time.
+* **Schedule**: Represents a doctor's available appointments.
 
-## 2. Arquitetura da Solução
+## 2. Solution Architecture
 
-Utilizamos uma arquitetura orientada a eventos e serverless na AWS para promover escalabilidade, resiliência e alta disponibilidade.
+We use an event-driven, serverless architecture on AWS to promote scalability, resilience, and high availability.
 
-*   **Back-end**: Uma coleção de funções AWS Lambda que expõem uma API via Amazon API Gateway. A comunicação entre os serviços é desacoplada usando Amazon SQS e SNS.
-*   **Banco de Dados**: Amazon DynamoDB.
+* **Backend**: A collection of AWS Lambda functions that expose an API via Amazon API Gateway. Communication between services is decoupled using Amazon SQS and SNS.
+* **Database**: Amazon DynamoDB.
 
-## 3. Decisões de Tecnologia e Princípios de Design
+## 3. Technology Decisions and Design Principles
 
-*   **Linguagem de Programação**: C# (.NET 8)
-*   **Padrões de Design**:
-    *   Domain-Driven Design (DDD)
-    *   SOLID
-    *   Injeção de Dependência (DI)
-*   **Segurança**: Autenticação e Autorização gerenciadas pelo Auth0.
-*   **Infraestrutura como Código (IaC)**: Gerenciamento de recursos da AWS com ferramentas como AWS CloudFormation, Terraform ou Pulumi.
-*   **Containerização**: Docker para empacotar as aplicações, garantindo um ambiente de execução consistente.
+* **Programming Language**: C# (.NET 8)
+* **Design Patterns**:
+* Domain-Driven Design (DDD)
+* SOLID
+* Dependency Injection (DI)
+* **Security**: Authentication and Authorization managed by Auth0.
+* **Infrastructure as Code (IaC)**: AWS resource management with tools such as AWS CloudFormation, Terraform, or Pulumi. Containerization: Docker to package applications, ensuring a consistent execution environment.
 
-## 4. Execução Local com AWS SAM CLI
+4. Local Execution with AWS SAM CLI
 
-Para simular o ambiente AWS localmente e testar a aplicação, utilize o AWS SAM CLI. Certifique-se de ter o Docker instalado e em execução, pois o SAM CLI utiliza contêineres Docker para emular as funções Lambda.
+To simulate the AWS environment locally and test the application, use the AWS SAM CLI. Make sure you have Docker installed and running, as the SAM CLI uses Docker containers to emulate Lambda functions.
 
-1.  **Construir o Projeto SAM:**
-    Navegue até o diretório raiz do projeto e execute o comando `sam build`. Este comando prepara sua aplicação para execução local, criando as imagens Docker necessárias.
+1. Build the SAM Project:
+Navigate to the project root directory and run the sam build command. This command prepares your application for local execution by creating the necessary Docker images.
 
-    ```bash
-    sam build
-    ```
+bash
+sam build
 
-2.  **Iniciar a API Localmente:**
-    Após a construção, você pode iniciar um endpoint local do API Gateway que invocará sua função Lambda.
+2. Start the API Locally:
+After building, you can start a local API Gateway endpoint that will invoke your Lambda function.
 
-    ```bash
-    sam local start-api
-    ```
+bash
+sam local start-api
 
-    A API estará disponível em `http://127.0.0.1:3000`. Você poderá enviar requisições para os endpoints definidos (ex: `http://127.0.0.1:3000/consultas`).
 
-    **Observação:** Para que o SAM CLI possa se comunicar com os serviços locais do DynamoDB e SNS (se você estiver usando ferramentas como o LocalStack), você precisará configurar as variáveis de ambiente ou o arquivo de credenciais da AWS para apontar para o endpoint local.
+The API will be available at http://127.0.0.1:3000. You can send requests to the defined endpoints (e.g., `http://127.0.0.1:3000/consultas`).
+
+**Note:** In order for the SAM CLI to communicate with local DynamoDB and SNS services (if you're using tools like LocalStack), you'll need to configure your environment variables or AWS credentials file to point to the local endpoint.

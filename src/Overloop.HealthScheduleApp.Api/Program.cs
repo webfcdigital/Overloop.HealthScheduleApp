@@ -8,60 +8,78 @@ using Overloop.HealthScheduleApp.Application.Services;
 using Overloop.HealthScheduleApp.Domain.Interfaces;
 using Overloop.HealthScheduleApp.Infrastructure.Repositories;
 using Overloop.HealthScheduleApp.Infrastructure.Services;
+using System.Reflection;
 
-var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-builder.Services.AddControllers();
-builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
-
-// Configure Auth0 Authentication
-builder.Services.AddAuthentication(options =>
+public partial class Program
 {
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(options =>
-{
-    options.Authority = builder.Configuration["Auth0:Domain"];
-    options.Audience = builder.Configuration["Auth0:Audience"];
-    options.TokenValidationParameters = new TokenValidationParameters
+    public static void Main(string[] args)
     {
-        NameClaimType = "name"
-    };
-});
+        CreateApp(args).Run();
+    }
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+    public static WebApplication CreateApp(string[] args)
+    {
+        var builder = WebApplication.CreateBuilder(args);
 
-// Add application services and repositories
-builder.Services.AddScoped<IConsultaApplicationService, ConsultaApplicationService>();
-builder.Services.AddScoped<IConsultaRepository, ConsultaRepository>();
-builder.Services.AddScoped<INotificationService, NotificationService>();
-builder.Services.AddScoped<IMedicoApplicationService, MedicoApplicationService>();
-builder.Services.AddScoped<IPacienteApplicationService, PacienteApplicationService>();
-builder.Services.AddScoped<IMedicoRepository, MedicoRepository>();
-builder.Services.AddScoped<IPacienteRepository, PacienteRepository>();
+        // Add services to the container.
+        builder.Services.AddControllers();
+        builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
 
-// Add AWS services
-builder.Services.AddAWSService<IAmazonDynamoDB>();
-builder.Services.AddAWSService<IAmazonSimpleNotificationService>();
-builder.Services.AddAWSService<IAmazonSQS>();
+        // Configure Auth0 Authentication
+        builder.Services.AddAuthentication(options =>
+        {
+            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        }).AddJwtBearer(options =>
+        {
+            options.Authority = builder.Configuration["Auth0:Domain"];
+            options.Audience = builder.Configuration["Auth0:Audience"];
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                NameClaimType = "name"
+            };
+        });
 
-var app = builder.Build();
+        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+        builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddSwaggerGen(options =>
+        {
+            // Set the comments path for the Swagger JSON and UI.
+            var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+            var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+            options.IncludeXmlComments(xmlPath);
+        });
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
+        // Add application services and repositories
+        builder.Services.AddScoped<IConsultaApplicationService, ConsultaApplicationService>();
+        builder.Services.AddScoped<IConsultaRepository, ConsultaRepository>();
+        builder.Services.AddScoped<INotificationService, NotificationService>();
+        builder.Services.AddScoped<IMedicoApplicationService, MedicoApplicationService>();
+        builder.Services.AddScoped<IPacienteApplicationService, PacienteApplicationService>();
+        builder.Services.AddScoped<IMedicoRepository, MedicoRepository>();
+        builder.Services.AddScoped<IPacienteRepository, PacienteRepository>();
+
+        // Add AWS services
+        builder.Services.AddAWSService<IAmazonDynamoDB>();
+        builder.Services.AddAWSService<IAmazonSimpleNotificationService>();
+        builder.Services.AddAWSService<IAmazonSQS>();
+
+        var app = builder.Build();
+
+        // Configure the HTTP request pipeline.
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseSwagger();
+            app.UseSwaggerUI();
+        }
+
+        app.UseHttpsRedirection();
+
+        app.UseAuthentication(); // Add this line
+        app.UseAuthorization();
+
+        app.MapControllers();
+
+        return app;
+    }
 }
-
-app.UseHttpsRedirection();
-
-app.UseAuthentication(); // Add this line
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();
